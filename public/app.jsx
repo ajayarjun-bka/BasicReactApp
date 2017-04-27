@@ -1,4 +1,22 @@
 var Greeter = React.createClass({
+  render: function(){
+    return(<h1>Hello React</h1>);
+  }
+});
+
+var Form = React.createClass({
+  render:function(){
+    return(
+      <form>
+        <input type="text" ref="name"/>
+        <button>SUBMIT</button>
+      </form>
+    );
+  }
+});
+
+
+var RootComponent = React.createClass({
   getDefaultProps : function()
   {
     return {
@@ -37,6 +55,8 @@ var Greeter = React.createClass({
         <input type="text" ref="name"/>
         <button>SUBMIT</button>
       </form>
+      <Greeter/>
+      <Form/>
     </div>
   );
 }
@@ -45,6 +65,6 @@ var Greeter = React.createClass({
 
 
 ReactDOM.render(
-  <Greeter/>,
+  <RootComponent/>,
   document.getElementById('app')
 );
