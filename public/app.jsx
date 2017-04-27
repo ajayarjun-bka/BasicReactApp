@@ -17,21 +17,30 @@ var GreeterForm = React.createClass({
     let nameref=this.refs.name;
     let name = nameref.value;
     nameref.value='';
-    if(typeof name === 'string' && name.length>0)
+    let messageref=this.refs.message;
+    let message = messageref.value;
+    messageref.value='';
+    console.log(name);
+    console.log(message);
+    if((typeof name === 'string' && name.length>0) || (typeof message === 'string' && message.length>0))
     {
-      console.log(name);
-      this.props.onNewName(name);
+      console.log('Condition Passed');
+      this.props.onNewName(name,message);
   }
   else{
-    console.log('Invalid');
-    name = '';
-    this.props.onNewName(name)
+    console.log('Condition Failed');
+    // name = '';
+    // this.props.onNewName(name)
   }
 },
   render:function(){
     return(
       <form onSubmit={this.onSubmit}>
-        <input type="text" ref="name"/>
+        <input type="text" ref="name" placeholder="Enter a Name"/>
+        <br></br>
+        <br></br>
+        <input type="textarea" ref="message" placeholder="Enter a message"/>
+        <br></br><br></br>
         <button>SUBMIT</button>
       </form>
     );
@@ -53,14 +62,18 @@ var Greeter = React.createClass({
       message :this.props.message
     })
   },
-  handleNewName : function(name){
+  handleNewName : function(name,message){
     if(name.length>0)
     {
-    this.setState({name:name,message:'see the cahnges'});
+    this.setState({name:name});
   }
-  else {
-      this.setState({message:'Enter Valid Text into the textbox'});
+  if(message.length>0)
+  {
+  this.setState({message:message});
   }
+  // else {
+  //     this.setState({message:'Enter Valid Text into the textbox'});
+  // }
 },
   render:function(){
     var name = this.state.name;
